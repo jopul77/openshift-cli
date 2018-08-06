@@ -2,8 +2,8 @@ FROM frolvlad/alpine-glibc:latest
 
 LABEL maintainer="Jeffery Bagirimvano"
 
-ENV OC_VERSION=v3.10.0 \
-    OC_TAG_SHA=dd10d17 \
+ENV OC_VERSION=v3.9.0 \
+    OC_TAG_SHA=191fece \
     S2I_VERSION='1.1.10' \
     S2I_TAG_SHA='27f0729d' \
     BUILD_DEPS='tar gzip' \
