@@ -7,9 +7,10 @@ ENV OC_VERSION=v3.9.0 \
     S2I_VERSION='1.1.10' \
     S2I_TAG_SHA='27f0729d' \
     BUILD_DEPS='tar gzip' \
-    RUN_DEPS='curl ca-certificates gettext ansible git bash'
+    RUN_DEPS='curl ca-certificates gettext ansible git bash py-dnspython'
 
 RUN apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
+    apk --no-cache add py-jmespath --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
     curl -sLo /tmp/oc.tar.gz https://github.com/openshift/origin/releases/download/${OC_VERSION}/openshift-origin-client-tools-${OC_VERSION}-${OC_TAG_SHA}-linux-64bit.tar.gz && \
     tar xzvf /tmp/oc.tar.gz -C /tmp/ && \
     mv /tmp/openshift-origin-client-tools-${OC_VERSION}-${OC_TAG_SHA}-linux-64bit/oc /usr/local/bin/ && \
