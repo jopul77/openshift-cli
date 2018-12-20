@@ -1,0 +1,12 @@
+FROM fedora:latest
+
+LABEL maintainer="Jeffery Bagirimvano"
+
+RUN dnf update -y && \
+    dnf install -y origin-clients git ansible python3-dns python3-jmespath && \
+    echo "[defaults]" > /etc/ansible/ansible.cfg && \
+    echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
+    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg 
+
+CMD ["/usr/bin/oc"]
+
