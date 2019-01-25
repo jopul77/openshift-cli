@@ -6,7 +6,9 @@ RUN dnf update -y && \
     dnf install -y origin-clients git ansible python3-dns python3-jmespath && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
-    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg 
+    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg && \
+    echo "localhost     ansible_connection=local" >> /etc/ansible/hosts && \
+    pip3 install --user requests PyVmomi
 
 CMD ["/usr/bin/oc"]
 
