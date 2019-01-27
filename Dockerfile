@@ -27,7 +27,6 @@ RUN apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg && \
     echo "localhost     ansible_connection=local" >> /etc/ansible/hosts && \
-    pip3 install --user requests PyVmomi && \
     ln -s /usr/bin/python3 /usr/bin/python && \
     apk del $BUILD_DEPS
 
