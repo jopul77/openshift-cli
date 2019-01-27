@@ -10,6 +10,7 @@ ENV OC_VERSION=v3.11.0 \
 
 USER root
 
+# https://github.com/sgerrand/alpine-pkg-glibc/
 ADD https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub /etc/apk/keys/sgerrand.rsa.pub
 ADD https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk /tmp/glibc-${GLIBC_VERSION}.apk
 
