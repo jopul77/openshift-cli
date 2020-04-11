@@ -2,13 +2,12 @@ FROM fedora:latest
 
 LABEL maintainer="Jeffery Bagirimvano"
 
-RUN dnf update -y && \
-    dnf install -y origin-clients git ansible python3-dns python3-jmespath && \
+RUN set -x && dnf update -y && \
+    dnf install -y origin-clients git ansible python3-dns python3-jmespath python3-pyvmomi && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg && \
-    echo "localhost     ansible_connection=local" >> /etc/ansible/hosts && \
-    pip3 install --user requests PyVmomi
+    echo "localhost     ansible_connection=local" >> /etc/ansible/hosts
 
 CMD ["/usr/bin/oc"]
 
