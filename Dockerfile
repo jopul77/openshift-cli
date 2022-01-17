@@ -5,8 +5,8 @@ LABEL maintainer="Jeffery Bagirimvano"
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
     RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'\
-    TRIVY_VERSION 0.22.0\
-    TRIVY_CHECKSUM ce09fc69627c02d879fe03704df866b576b1fc0486f7cf0fc8b06e9dbd6f142c
+ENV TRIVY_VERSION 0.22.0
+ENV TRIVY_CHECKSUM ce09fc69627c02d879fe03704df866b576b1fc0486f7cf0fc8b06e9dbd6f142c
 
 # https://pkgs.alpinelinux.org/packages to search packages
 RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
