@@ -18,6 +18,14 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg
-
+    TRIVY_DIR="${HOME}/trivy"
+    TRIVY="${TRIVY_DIR}/trivy"
+    mkdir -p "${HOME}/trivy"
+    VERSION=$(curl --silent https://api.github.com/repos/aquasecurity/trivy/releases/latest | jq -r '.tag_name' | sed -E 's/[A-Za-z]+//')
+    VERSION="0.1.6"
+    TARBALL="trivy_${VERSION}_Linux-64bit.tar.gz"
+    wget "https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/${TARBALL}"
+    tar xzvf "${TARBALL}" -C "${TRIVY_DIR}"
+    chmod 700 "${TRIVY}"
 CMD ["/usr/local/bin/oc"]
 
