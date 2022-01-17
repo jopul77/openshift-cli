@@ -4,8 +4,8 @@ LABEL maintainer="Jeffery Bagirimvano"
 
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
-    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'
-    TRIVY_VERSION 0.22.0
+    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'\
+    TRIVY_VERSION 0.22.0\
     TRIVY_CHECKSUM ce09fc69627c02d879fe03704df866b576b1fc0486f7cf0fc8b06e9dbd6f142c
 
 # https://pkgs.alpinelinux.org/packages to search packages
@@ -19,10 +19,10 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     mkdir -p /etc/ansible && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
-    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg
+    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg\
     curl -L https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz \
     -o trivy.tar.gz; \
     echo "${TRIVY_CHECKSUM}  trivy.tar.gz" | sha256sum -c -; \
-    tar xf trivy.tar.gz && rm trivy.tar.gz && chmod ugo+x trivy;
+    tar xf trivy.tar.gz && rm trivy.tar.gz && chmod ugo+x trivy
 CMD ["/usr/local/bin/oc"]
 
