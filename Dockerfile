@@ -1,11 +1,12 @@
+
+  
 FROM frolvlad/alpine-glibc:latest
 
 LABEL maintainer="Jeffery Bagirimvano"
 
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
-    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'\
-ENV TRIVY_VERSION=0.22.0
+    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'
 
 # https://pkgs.alpinelinux.org/packages to search packages
 RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
@@ -19,10 +20,5 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg
-    
-RUN wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
-      tar zxvf trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
-      mv trivy /usr/local/bin
-      
-CMD ["/usr/local/bin/oc"]
 
+CMD ["/usr/local/bin/oc"]
