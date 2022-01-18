@@ -6,7 +6,8 @@ LABEL maintainer="Jeffery Bagirimvano"
 
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
-    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip'
+    RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip' \
+    TRIVY_VERSION=0.21.2
 
 # https://pkgs.alpinelinux.org/packages to search packages
 RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
@@ -17,8 +18,13 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     mv /tmp/openshift-origin-client-tools-${OC_VERSION}-${OC_TAG_SHA}-linux-64bit/kubectl /usr/local/bin/ && \
     rm -rf /tmp/oc.tar.gz /tmp/openshift-origin-client-tools-${OC_VERSION}-${OC_TAG_SHA}-linux-64bit && \
     mkdir -p /etc/ansible && \
+    
+    mkdir -p /opt/trivy/ && \
+    wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O /opt/trivy/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
+    tar xvfz /opt/trivy/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -C /opt/trivy/ && cp /opt/trivy/trivy /bin/ && chmod +x /bin/trivy &&\
+    
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
-    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg
+    echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg \
 
 CMD ["/usr/local/bin/oc"]
