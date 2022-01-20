@@ -3,6 +3,7 @@
 FROM frolvlad/alpine-glibc:latest
 
 LABEL maintainer="Jeffery Bagirimvano"
+USER root
 
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
