@@ -22,7 +22,6 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     mkdir -p /opt/trivy/ && \
     wget https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O /opt/trivy/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz && \
     tar xvfz /opt/trivy/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -C /opt/trivy/ && cp /opt/trivy/trivy /bin/ && chmod +x /bin/trivy &&\
-    rm -rf /opt/trivy /
     
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
