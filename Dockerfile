@@ -7,7 +7,7 @@ LABEL maintainer="Jeffery Bagirimvano"
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
     RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip' \
-    TRIVY_VERSION=0.21.24
+    TRIVY_VERSION=0.22.0
     
 ENV DOCKER_VERSION=1.13.1 \
     DOCKER_COMPOSE_VERSION=1.11.1 \
