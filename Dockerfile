@@ -5,6 +5,8 @@ FROM frolvlad/alpine-glibc:latest
 LABEL maintainer="Jeffery Bagirimvano"
 USER root
 
+VOLUME /var/run/docker.sock
+
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
     RUN_DEPS='curl ca-certificates gettext ansible git bash py3-dnspython tar gzip' \
