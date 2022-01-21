@@ -65,4 +65,6 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg \
 
+RUN rc-update add docker boot
+
 CMD ["/usr/local/bin/oc"]
