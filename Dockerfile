@@ -24,8 +24,6 @@ RUN apk --update --no-cache \
         apk add py-pip && \
         pip install docker-compose==${DOCKER_COMPOSE_VERSION}
         
-VOLUME /var/run/docker.sock
-
 RUN curl -L https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz | tar zxv
 RUN mv ./entrykit /bin/entrykit
 RUN chmod +x /bin/entrykit && entrykit --symlink
@@ -67,6 +65,8 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "[defaults]" > /etc/ansible/ansible.cfg && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg \
+
+RUN sudo touch /var/run/docker.sock && sudo chmod o+rw /var/run/docker.sock
 
 RUN rc-update add docker default
 ENTRYPOINT ["sh","/docker-lib.sh"]
