@@ -67,4 +67,6 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
 
 RUN rc-update add docker default
 
-CMD ["/usr/local/bin/oc"]
+change ENTRYPOINT script like this:
+
+ENTRYPOINT ["sh","/docker-lib.sh"]
