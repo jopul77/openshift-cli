@@ -5,7 +5,6 @@ FROM frolvlad/alpine-glibc:latest
 LABEL maintainer="Jeffery Bagirimvano"
 USER root
 
-VOLUME /var/run/docker.sock
 
 ENV OC_VERSION=v3.11.0 \
     OC_TAG_SHA=0cbc58b \
@@ -24,6 +23,8 @@ RUN apk --update --no-cache \
     && \
         apk add py-pip && \
         pip install docker-compose==${DOCKER_COMPOSE_VERSION}
+        
+VOLUME /var/run/docker.sock
 
 RUN curl -L https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz | tar zxv
 RUN mv ./entrykit /bin/entrykit
