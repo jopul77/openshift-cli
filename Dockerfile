@@ -66,7 +66,10 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "# human-readable stdout/stderr results display" >> /etc/ansible/ansible.cfg && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg \
 
-RUN touch /var/run/docker.sock && chmod o+rw /var/run/docker.sock
+RUN touch /var/run/docker.sock
+COPY /var/run/docker.sock /var/run/docker.sock
+
+RUN chown root:docker /var/run/docker.sock
 
 RUN rc-update add docker default
 ENTRYPOINT ["sh","/docker-lib.sh"]
