@@ -66,7 +66,4 @@ RUN set -x && apk --no-cache add $BUILD_DEPS $RUN_DEPS && \
     echo "stdout_callback = yaml" >> /etc/ansible/ansible.cfg \
 
 RUN rc-update add docker default
-
-change ENTRYPOINT script like this:
-
 ENTRYPOINT ["sh","/docker-lib.sh"]
